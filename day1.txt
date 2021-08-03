@@ -1,0 +1,114 @@
+
+
+CREATING DB:
+CREATE DATABASE plsql;
+Use plsql;
+
+1)Create a table with name depart
+use plsql;
+CREATE TABLE depart( DEPART_ID INTEGER(4) PRIMARY KEY,DEPART_NAME VARCHAR(30)NOT NULL,MANAGER_ID INTEGER(6) UNIQUE);
+desc depart;
+_____________________________________________
+DEPART_ID	int	NO	PRI	
+DEPART_NAME	varchar(30)	NO		
+MANAGER_ID	int	YES	UNI
+_____________________________________________
+
+2)Create a table with name employees
+CREATE TABLE employees( EMP_ID INTEGER(6) PRIMARY KEY,EMP_NAME VARCHAR(20),EMAIL character(25), PHONE_NUMBER VARCHAR(10),DEPT_ID INTEGER(4));
+desc employees;
+_____________________________________________
+EMP_ID	         int	    NO	PRI	
+EMP_NAME	    varchar(20)	YES		
+EMAIL	        char(25)	YES		
+PHONE_NUMBER	varchar(10)	YES		
+DEPT_ID	        int	YES		
+_____________________________________________
+
+3)Using Alter command add a new column in employees table with name salary and with datatype
+and precision as Number(8,2)
+ALTER TABLE employees ADD SALARY DECIMAL(8,2);
+desc employees;
+_____________________________________________
+EMP_ID  	    int	            NO	PRI	
+EMP_NAME    	varchar(20)	    YES		
+EMAIL	        char(25)	    YES		
+PHONE_NUMBER	varchar(10) 	YES		
+DEPT_ID	        int	            YES		
+SALARY	        decimal(8,2)	YES		
+_____________________________________________
+
+4)Using Alter command add a new table constraint in employees table with name for key for
+DEPT_ID column in employees table which refers the primary key of depart table (consider the
+usage of both foreign key and references constraints)
+ALTER TABLE employees 
+ADD FOREIGN KEY (DEPT_ID) REFERENCES depart(DEPART_ID);
+_____________________________________________
+EMP_ID      	int     	    NO	PRI	
+EMP_NAME    	varchar(20) 	YES		
+EMAIL       	char(25)	    YES		
+PHONE_NUMBER	varchar(10)	    YES		
+DEPT_ID	        int	            YES	MUL	
+SALARY	        decimal(8,2)	YES		
+_____________________________________________
+
+5)Using Alter command drop the constraint in employees table with name for key and modify the
+column DEPT_ID with column constraint references for the primary key in depart table.
+removing primary key from employees table:
+alter table employees drop primary key;
+desc employees;
+_____________________________________________
+EMP_ID	        int	            NO	
+EMP_NAME    	varchar(20)	    YES	
+EMAIL	        char(25)	    YES	
+PHONE_NUMBER	varchar(10)	    YES	
+DEPT_ID	        int	            YES	MUL
+SALARY	        decimal(8,2)    YES	
+_____________________________________________
+removing foreign key from employees table:
+ALTER TABLE plsql.employees DROP constraint fk;DROP index DEPT_ID on employees;
+desc employees;
+_____________________________________________
+EMP_ID	int	NO		
+EMP_NAME        	varchar(20) 	YES		
+EMAIL	            char(25)	    YES		
+PHONE_NUMBER    	varchar(10) 	YES		
+DEPT_ID	            int	            YES	MUL	
+SALARY	            decimal(8,2)	YES		
+_____________________________________________
+
+6)Using Alter command drop the column in employees table with name EMAIL
+ALTER TABLE employees DROP EMAIL;
+_____________________________________________
+EMP_ID	        int	            NO	
+EMP_NAME	    varchar(20) 	YES	
+PHONE_NUMBER	varchar(10)	    YES	
+DEPT_ID     	int	            YES	MUL
+SALARY	        decimal(8,2)	YES	
+_____________________________________________
+7)After adding salary column (Q.3), add a column constraint to the EMPLOYEES table which
+restricts the addition of those employees who have salaries less than 10000.
+ALTER TABLE employees add constraint chk_salary check (salary<10000);
+__________________________________________________________________________________________
+3	205	21:52:45	ALTER TABLE employees RENAME TO empl	0 row(s) affected
+__________________________________________________________________________________________	
+8)Using Alter command, rename table employees as empl;
+ALTER TABLE employees RENAME TO empl;
+__________________________________________________________________________________________
+3	206	21:53:00	desc empl	5 row(s) returned	
+__________________________________________________________________________________________
+
+9)Create a new table with name depart1 as same as depart in structure
+create table depart1(DEPART_ID INTEGER(4) PRIMARY KEY, DEPART_NAME VARCHAR(30)NOT NULL,MANAGER_ID INTEGER(6) UNIQUE);
+DESC depart1;
+_____________________________________________
+DEPART_ID	int	NO	PRI
+DEPART_NAME	varchar(30)	NO	
+MANAGER_ID	int	YES	UNI
+_____________________________________________
+10)After creation, drop table depart1 using drop command
+alter table employees rename to empl;
+desc depart1;
+
+
+

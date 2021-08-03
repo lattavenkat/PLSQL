@@ -1,0 +1,167 @@
+                                                                    DAY 2
+
+
+1)-- inserting into depart table
+insert into depart(DEPART_ID,DEPART_NAME,MANAGER_ID) values(10,"purchase",123);
+insert into depart(DEPART_ID,DEPART_NAME,MANAGER_ID) values(20,"inventory",345);
+insert into depart(DEPART_ID,DEPART_NAME,MANAGER_ID) values(30,"sales",567);
+insert into depart(DEPART_ID,DEPART_NAME,MANAGER_ID) values(40,"materials",789);
+insert into depart(DEPART_ID,DEPART_NAME,MANAGER_ID) values(50,"production",911);
+desc depart;
+__________________________________________________________________________
+DEPT_ID     	DEPART_NAME							MANAGER_ID
+10	            purchase	                            123
+20	            inventory	                            345
+30	            sales	                                567
+40          	materials                           	789
+50             	production                          	911
+__________________________________________________________________________		
+
+2)
+-- inserting into employees table
+insert into employees(EMP_ID,EMP_NAME,PHONE_NUMBER,DEPT_ID,SALARY,EMAIL) values(101,"Babu","9448341201",10,8000.00,"babu101@gmail.com");
+insert into employees(EMP_ID,EMP_NAME,PHONE_NUMBER,DEPT_ID,SALARY,EMAIL) values(102,"Somu","9448534120 ",20,7000.00,"somu102@gmail.com");
+insert into employees(EMP_ID,EMP_NAME,PHONE_NUMBER,DEPT_ID,SALARY,EMAIL) values(103,"Ramu","9448886634 ",40,9000.00,"ramu103@gmail.com");
+insert into employees(EMP_ID,EMP_NAME,PHONE_NUMBER,DEPT_ID,SALARY,EMAIL) values(104,"Gobu","9447783412 ",50,3000.00,"gobu104@gmail.com");
+insert into employees(EMP_ID,EMP_NAME,PHONE_NUMBER,DEPT_ID,SALARY,EMAIL) values(105,"Anbu","9848341200 ",40,9000.00,"anbu105@gmail.com");
+insert into employees(EMP_ID,EMP_NAME,PHONE_NUMBER,DEPT_ID,SALARY,EMAIL) values(106,"Rahu","9848341400 ",30,5000.00,"rahuu106@gmail.com");
+insert into employees(EMP_ID,EMP_NAME,PHONE_NUMBER,DEPT_ID,SALARY,EMAIL) values(107,"Rahul","9898341400",10,2000.00,"rahul107@gmail.com");
+desc employees;
+_______________________________________________________________________________________
+EMP_ID  EMP_NAME    PHONE_NUMBER 	DEPT_ID        SALARY 		    EMAIL
+101	    Babu	    9448341201	    10          	8000.00	    babu101@gmail.com
+102	    Somu	    9448534120  	20          	7000.00	    somu102@gmail.com
+103	    Ramu	    9448886634  	40	            9000.00	    ramu103@gmail.com
+104	    Gobu	    9447783412	    50          	3000.00	    gobu104@gmail.com
+105	    Anbu	    9848341200  	40	            9000.00	    anbu105@gmail.com
+106	    Rahu	    9848341400  	30	            5000.00	    rahuu106@gmail.com
+107	    Rahul	    9898341400  	10	            2000.00	    rahul107@gmail.com
+_______________________________________________________________________________________
+
+-- 3(a)Select all employees working in materials department
+select * from employees e,depart d where d.DEPART_ID=e.DEPT_ID  and DEPART_NAME="materials";
+_________________________________________________________________________________________
+EMP_ID  EMP_NAME  PHONE_NUMBER  DEPT_ID     SALARY 		    EMAIL               DEPT_ID
+105	    Anbu	  9848341200	40	        9000.00	        anbu105@gmail.com	40
+103	    Ramu	  9448886634	40	        9000.00	        ramu103@gmail.com	40
+_________________________________________________________________________________________
+
+-- (b)Select the department number and employees’ names who are working in sales
+select DEPT_ID,EMP_NAME from employees e,depart d where d.DEPART_ID=e.DEPT_ID  and DEPART_NAME="sales";
+_______________________
+ DEPT_ID    EMP_NAME
+ 30	        Rahu
+_______________________
+ -- (c) Select the names of the employees who are working in materials department earning salary
+-- more than 15000
+select EMP_NAME from employees e,depart d where d.DEPART_ID=e.DEPT_ID  and DEPART_NAME="materials" and SALARY<=15000;
+__________
+EMP_NAME
+Anbu
+Ramu
+__________
+-- (d) select all employee’s name, salary and 5% of their salary as BONUS
+SELECT EMP_NAME, SALARY*5/100  as psal from employees;
+_____________________
+EMP_NAME  PSAL	
+Rahul	100.000000
+Anbu	450.000000
+Rahu	250.000000
+Ramu	450.000000
+Gobu	150.000000
+Babu	400.000000
+Somu	350.000000
+_____________________
+-- (e) select all employees details whose name starts with letter ‘R’;
+SELECT * FROM employees WHERE EMP_NAME LIKE 'R%';
+_______________________________________________________________________________________
+EMP_ID  EMP_NAME    PHONE_NUMBER 	DEPT_ID        SALARY 		    EMAIL
+107	    Rahul	    9898341400  	10          	2000.00	    rahul107@gmail.com
+106	    Rahu	    9848341400	    30          	5000.00	    rahuu106@gmail.com
+103	    Ramu	    9448886634  	40	            9000.00	    ramu103@gmail.com
+_______________________________________________________________________________________
+ -- 4(a)
+UPDATE employees, depart set SALARY=SALARY+(SALARY*0.1) where  DEPART_ID=DEPT_ID and DEPART_NAME='sales';
+______________________________________________________________________________
+EMP_ID  EMP_NAME  PHONE_NUMBER  DEPT_ID     SALARY 		    EMAIL               	
+107	    Rahul	    9898341400	10	        2000.00	    rahul107@gmail.com
+105	    Anbu    	9848341200	40	        9000.00	    anbu105@gmail.com
+106	    Rahu	    9848341400	30      	6050.00	    rahuu106@gmail.com
+103 	Ramu	    9448886634	40	        9000.00	    ramu103@gmail.com
+104	    Gobu    	9447783412	50      	3000.00 	gobu104@gmail.com
+101 	Babu    	9448341201	10      	8000.00 	babu101@gmail.com
+102 	Somu	    9448534120	20	        7000.00	    somu102@gmail.com
+_______________________________________________________________________________
+-- 4(b)
+UPDATE employees, depart set SALARY=SALARY-(SALARY*0.03) where  DEPART_ID=DEPT_ID and DEPART_NAME='inventory';
+SELECT * FROM employees;
+_______________________________________________________________________________________
+EMP_ID  EMP_NAME  PHONE_NUMBER  DEPT_ID     SALARY 		    EMAIL               			
+107	    Rahul	    9898341400	10	        2000.00	    rahul107@gmail.com
+105	    Anbu	    9848341200	40	        9000.00	    anbu105@gmail.com
+106	    Rahu	    9848341400	30      	6050.00	    rahuu106@gmail.com
+103	    Ramu	    9448886634	40      	9000.00 	ramu103@gmail.com
+104	    Gobu	    9447783412	50      	3000.00 	gobu104@gmail.com
+101 	Babu	    9448341201	10      	8000.00	    babu101@gmail.com
+102	    Somu	    9448534120	20      	6790.00 	somu102@gmail.com
+_______________________________________________________________________________________
+-- 5
+CREATE TABLE updatedemp AS SELECT EMP_ID, EMP_NAME, PHONE_NUMBER FROM employees where DEPT_ID>20;
+desc updatedemp;
+___________________________________
+EMP_ID	            int	NO			
+EMP_NAME	    varchar(20)	YES			
+PHONE_NUMBER	varchar(10)	YES			
+___________________________________
+-- 6
+DELETE FROM employees WHERE SALARY<12000;
+SELECT * FROM employees;
+______________________________
+1	Latha	9876543234	1000	
+______________________________
+-- 7
+CREATE VIEW viewtable AS SELECT * FROM updatedemp;
+SELECT * FROM viewtable;
+___________________________________
+EMP_ID  EMP_NAME    PHONE_NUMBER
+106	    Rahu    	9848341400
+105 	Anbu	    9848341200
+103	    Ramu	    9448886634
+104	    Gobu	    9447783412
+1	    Latha	    9876543234
+___________________________________
+
+--  8
+CREATE VIEW mytab AS SELECT EMP_ID, EMP_NAME, DEPT_ID FROM  employees WHERE SALARY<=5000.00;
+SELECT * FROM mytab;
+_______________________________ 
+EMP_ID  	int	NO			
+EMP_NAME	varchar(20)	YES			
+DEPT_ID	    int	YES	
+_______________________________
+-- 9
+SELECT * FROM employees ORDER BY SALARY ASC;
+_______________________________________________________________________________________
+EMP_ID  EMP_NAME  PHONE_NUMBER  DEPT_ID     SALARY 		    EMAIL   
+1	    Latha	    9876543234	101         1000.00		    latta@gmail.com
+107	    Rahul	    9898341400	10	        2000.00	        rahul107@gmail.com
+104	    Gobu	    9447783412	50	        3000.00	        gobu104@gmail.com
+106 	Rahu	    9848341400	30	        5000.00	        rahuu106@gmail.com
+102	    Somu	    9448534120	20      	7000.00	        somu102@gmail.com
+101	    Babu	    9448341201	10	        8000.00	        babu101@gmail.com
+103 	Ramu    	9448886634	40      	9000.00     	ramu103@gmail.com
+105	    Anbu    	9848341200	40      	9000.00	        anbu105@gmail.com
+_______________________________________________________________________________________
+-- 10
+SELECT * FROM employees ORDER BY EMP_NAME DESC;
+_______________________________________________________________________________________
+EMP_ID  EMP_NAME  PHONE_NUMBER  DEPT_ID     SALARY 		    EMAIL   
+102	    Somu	    9448534120	20	        7000.00	        somu102@gmail.com
+103	    Ramu	    9448886634	40	        9000.00	        ramu103@gmail.com
+107 	Rahul	    9898341400	10	        2000.00	        rahul107@gmail.com
+106 	Rahu	    9848341400	30      	5000.00     	rahuu106@gmail.com
+1	    Latha	    9876543234	101         1000.00         latta@gmail.com		
+104 	Gobu    	9447783412	50      	3000.00	        gobu104@gmail.com
+101 	Babu	    9448341201	10      	8000.00	        babu101@gmail.com
+105 	Anbu	    9848341200	40      	9000.00	        anbu105@gmail.com
+_______________________________________________________________________________________
