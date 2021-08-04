@@ -36,7 +36,8 @@ Female	560.0000
 Male	507.3333
 _______________________
 -- 1(D)select all students who scored marks greater than the average mark of the students in the 
-table
+table.
+
 SELECT stu_name FROM student WHERE tot_marks > (SELECT AVG(tot_marks) FROM student);
 _______________
 stu_name
@@ -50,7 +51,8 @@ the entire students in the table
 select stu_name,avg(tot_marks) from student where tot_marks>(select avg(tot_marks) from student);
 _____________________________
 stu_name        avg(mark)
-Anu	            574.2500
+492.0000	     Female
+507.3333	     Male
 _____________________________
 -- 2(A)select all student details whose name value consists of exactly three characters.
 SELECT stu_name from student where LIKE '___';
