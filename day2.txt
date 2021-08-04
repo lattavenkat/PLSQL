@@ -53,7 +53,8 @@ _______________________
  30	        Rahu
 _______________________
  -- (c) Select the names of the employees who are working in materials department earning salary
--- more than 15000
+-- less than 15000
+
 select EMP_NAME from employees e,depart d where d.DEPART_ID=e.DEPT_ID  and DEPART_NAME="materials" and SALARY<=15000;
 __________
 EMP_NAME
@@ -75,7 +76,7 @@ _____________________
 -- (e) select all employees details whose name starts with letter ‘R’;
 SELECT * FROM employees WHERE EMP_NAME LIKE 'R%';
 _______________________________________________________________________________________
-EMP_ID  EMP_NAME    PHONE_NUMBER 	DEPT_ID        SALARY 		    EMAIL
+EMP_ID  EMP_NAME    PHONE_NUMBER 	DEPT_ID         SALARY 		    EMAIL
 107	    Rahul	    9898341400  	10          	2000.00	    rahul107@gmail.com
 106	    Rahu	    9848341400	    30          	5000.00	    rahuu106@gmail.com
 103	    Ramu	    9448886634  	40	            9000.00	    ramu103@gmail.com
@@ -97,24 +98,24 @@ UPDATE employees, depart set SALARY=SALARY-(SALARY*0.03) where  DEPART_ID=DEPT_I
 SELECT * FROM employees;
 _______________________________________________________________________________________
 EMP_ID  EMP_NAME  PHONE_NUMBER  DEPT_ID     SALARY 		    EMAIL               			
-107	    Rahul	    9898341400	10	        2000.00	    rahul107@gmail.com
-105	    Anbu	    9848341200	40	        9000.00	    anbu105@gmail.com
-106	    Rahu	    9848341400	30      	6050.00	    rahuu106@gmail.com
-103	    Ramu	    9448886634	40      	9000.00 	ramu103@gmail.com
-104	    Gobu	    9447783412	50      	3000.00 	gobu104@gmail.com
-101 	Babu	    9448341201	10      	8000.00	    babu101@gmail.com
+
 102	    Somu	    9448534120	20      	6790.00 	somu102@gmail.com
 _______________________________________________________________________________________
 -- 5
 CREATE TABLE updatedemp AS SELECT EMP_ID, EMP_NAME, PHONE_NUMBER FROM employees where DEPT_ID>20;
 desc updatedemp;
 ___________________________________
-EMP_ID	            int	NO			
+EMP_ID	            int	    NO			
 EMP_NAME	    varchar(20)	YES			
-PHONE_NUMBER	varchar(10)	YES			
-___________________________________
+PHONE_NUMBER	varchar(10)	YES		
+106	Rahu	9848341400
+103	Ramu	9448886634
+105	Anbu	9848341200
+104	Gobu	9447783412	
+_________________________________
+
 -- 6
-DELETE FROM employees WHERE SALARY<12000;
+DELETE FROM employees WHERE SALARY<5000;
 SELECT * FROM employees;
 ______________________________
 1	Latha	9876543234	1000	
@@ -138,6 +139,9 @@ _______________________________
 EMP_ID  	int	NO			
 EMP_NAME	varchar(20)	YES			
 DEPT_ID	    int	YES	
+
+104	Gobu	50
+107	Rahul	10
 _______________________________
 -- 9
 SELECT * FROM employees ORDER BY SALARY ASC;
