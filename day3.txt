@@ -14,27 +14,29 @@ stu_name	varchar(30)	NO
 gender	    varchar(11)	YES		
 tot_marks	int	        YES	
 ____________________________________	
--- 1(A)
+-- 1(A)Select the maximum marks of a student in the table
 SELECT MAX(tot_marks) FROM student;
 ________________
 MAX(tot_marks)
 590
 ________________
--- 1(B)
+-- 1(B)Select the number of male and female students in the table
 SELECT gender,count(*) FROM student group by gender;
 ______________________________
 gender      count(*)
 Female	        2
 Male	        3
 ______________________________
--- 1 (C)
+-- 1 (C)Select the average marks scored by male and female group of students in the table
+
 SELECT gender,AVG(tot_marks) FROM student group by gender;
 ________________________
 gender  AVG(tot_marks)
 Female	560.0000
 Male	507.3333
 _______________________
--- 1(D)
+-- 1(D)select all students who scored marks greater than the average mark of the students in the 
+table
 SELECT stu_name FROM student WHERE tot_marks > (SELECT AVG(tot_marks) FROM student);
 _______________
 stu_name
@@ -42,19 +44,21 @@ Malini
 Sankar
 Varshan
 ______________
--- 1(E)
+-- 1(E)Select the group of students who scored greater average marks than the average marks of 
+the entire students in the table
+
 select stu_name,avg(tot_marks) from student where tot_marks>(select avg(tot_marks) from student);
 _____________________________
 stu_name        avg(mark)
 Anu	            574.2500
 _____________________________
--- 2(A)
+-- 2(A)select all student details whose name value consists of exactly three characters.
 SELECT stu_name from student where LIKE '___';
 _______________
 stu_name
 Anu
 _______________
--- 2(B)
+-- 2(B)Display all students in ascending order of their sex and descending order of their marks.
 SELECT * FROM student ORDER BY gender ASC , tot_marks DESC;
 _________________________________________________
 stu_id,    stu_name,    gender,     tot_marks
@@ -64,13 +68,16 @@ stu_id,    stu_name,    gender,     tot_marks
 40	        Sankar  	Male    	590
 50	        Varshan 	Male    	587
 _________________________________________________
--- 3)
+-- 3)Find the difference in marks between maximum and minimum in the class
 SELECT (max(tot_marks) - min(tot_marks)) as diff FROM student;
 _________
 diff
 245
 _________
--- 4
+-- 4)Create a view object for student table with name ‘mytab’ by 
+assuming your own condition for the selection and demonstrate 
+the role of ‘with check option’ for the created view.
+
 create view mytab as select * from student where tot_marks<=590 with check option;
 stu_id, stu_name,   gender, tot_marks
 10     	Anu	        Female	553
@@ -78,7 +85,11 @@ stu_id, stu_name,   gender, tot_marks
 30  	Malini	    Female	567
 50  	Varshan	    Male	587
 
---5
+--5)Perform 3 insertions with student table and then set a 
+savepoint s1. Again, perform any two deletion. Now check the 
+execution effect of ROLLBACK to s1, commit followed by another 
+Rollback.
+
 START TRANSACTION;
 SELECT * FROM student;
 SET sql_safe_updates=0;
@@ -100,19 +111,22 @@ stu_id, stu_name,   gender, tot_marks
 60	       Anubha	Female	453
 70	       Anbumani	Female	395
 _________________________________________________
---6
+--6)
+Write a simple PL/SQL (Anonymous block) program to find the 
+square and cube values for the given number
+
 DELIMITER //
-create procedure get_sq(in x int, in y int, out z int, out w int)
+create procedure get_math(in n1 int, in n2 int, out square int, out cubee int)
 begin
-set z= (x*x);
-set w= y*y*y;
+set square= (n1*n1);
+set cubee= (n2*n2*n2);
 end//
 
-call get_sq(100,3,@a,@b);
+call get_math(10,3,@a,@b);
 select @a;
 select @b;
 ________________________
 @a
-10
+100
 @b
 27

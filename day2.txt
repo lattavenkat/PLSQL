@@ -81,7 +81,7 @@ EMP_ID  EMP_NAME    PHONE_NUMBER 	DEPT_ID         SALARY 		    EMAIL
 106	    Rahu	    9848341400	    30          	5000.00	    rahuu106@gmail.com
 103	    Ramu	    9448886634  	40	            9000.00	    ramu103@gmail.com
 _______________________________________________________________________________________
- -- 4(a)
+ -- 4(a)Update all employee records in sales department with 10% raise in salary
 UPDATE employees, depart set SALARY=SALARY+(SALARY*0.1) where  DEPART_ID=DEPT_ID and DEPART_NAME='sales';
 ______________________________________________________________________________
 EMP_ID  EMP_NAME  PHONE_NUMBER  DEPT_ID     SALARY 		    EMAIL               	
@@ -93,7 +93,7 @@ EMP_ID  EMP_NAME  PHONE_NUMBER  DEPT_ID     SALARY 		    EMAIL
 101 	Babu    	9448341201	10      	8000.00 	babu101@gmail.com
 102 	Somu	    9448534120	20	        7000.00	    somu102@gmail.com
 _______________________________________________________________________________
--- 4(b)
+-- 4(b)Update all employee records in sales department with 10% raise in salary
 UPDATE employees, depart set SALARY=SALARY-(SALARY*0.03) where  DEPART_ID=DEPT_ID and DEPART_NAME='inventory';
 SELECT * FROM employees;
 _______________________________________________________________________________________
@@ -101,7 +101,9 @@ EMP_ID  EMP_NAME  PHONE_NUMBER  DEPT_ID     SALARY 		    EMAIL
 
 102	    Somu	    9448534120	20      	6790.00 	somu102@gmail.com
 _______________________________________________________________________________________
--- 5
+-- 5) After doing Q.3 and Q.4, create a table with name updatedemp by selecting columns Emp_ID,
+Emp_name, email associated with employees table and with dept_id values greater than 20.
+
 CREATE TABLE updatedemp AS SELECT EMP_ID, EMP_NAME, PHONE_NUMBER FROM employees where DEPT_ID>20;
 desc updatedemp;
 ___________________________________
@@ -114,13 +116,16 @@ PHONE_NUMBER	varchar(10)	YES
 104	Gobu	9447783412	
 _________________________________
 
--- 6
+-- 6)Delete all employees who are drawing salary less than 12000
+
 DELETE FROM employees WHERE SALARY<5000;
 SELECT * FROM employees;
 ______________________________
 1	Latha	9876543234	1000	
 ______________________________
--- 7
+-- 7)Create a new table with name view tab by selecting all values 
+from updatedemp
+
 CREATE VIEW viewtable AS SELECT * FROM updatedemp;
 SELECT * FROM viewtable;
 ___________________________________
@@ -132,7 +137,9 @@ EMP_ID  EMP_NAME    PHONE_NUMBER
 1	    Latha	    9876543234
 ___________________________________
 
---  8
+--  8)Create a view with name my tab with EMP_ID, EMP_NAME, DEPT_ID 
+with salary values greater than or equal to 10000.
+
 CREATE VIEW mytab AS SELECT EMP_ID, EMP_NAME, DEPT_ID FROM  employees WHERE SALARY<=5000.00;
 SELECT * FROM mytab;
 _______________________________ 
@@ -143,7 +150,9 @@ DEPT_ID	    int	YES
 104	Gobu	50
 107	Rahul	10
 _______________________________
--- 9
+-- 9) Create a view with name my tab with EMP_ID, EMP_NAME, DEPT_ID 
+with salary values greater than or equal to 10000.
+
 SELECT * FROM employees ORDER BY SALARY ASC;
 _______________________________________________________________________________________
 EMP_ID  EMP_NAME  PHONE_NUMBER  DEPT_ID     SALARY 		    EMAIL   
@@ -156,7 +165,9 @@ EMP_ID  EMP_NAME  PHONE_NUMBER  DEPT_ID     SALARY 		    EMAIL
 103 	Ramu    	9448886634	40      	9000.00     	ramu103@gmail.com
 105	    Anbu    	9848341200	40      	9000.00	        anbu105@gmail.com
 _______________________________________________________________________________________
--- 10
+-- 10) Display all rows in employees in descending order of their
+names 
+
 SELECT * FROM employees ORDER BY EMP_NAME DESC;
 _______________________________________________________________________________________
 EMP_ID  EMP_NAME  PHONE_NUMBER  DEPT_ID     SALARY 		    EMAIL   
